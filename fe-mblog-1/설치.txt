@@ -1,0 +1,68 @@
+리액트와 서블릿 연동 하기 - chat221228[E:\workspace_java\chat221228]
+: yarn 패키지매니져 사용함
+설치시 -g를 주면 전역에서 사용가능하게 설치(-D 개발자 의존성 주입 : spring maven,  gradle)
+npm install -g yarn
+패키지매니저 버전확인
+yarn -version
+리액트 프로젝트 생성하기
+1. yarn create react-app template2023
+단 현재 바라보는 폴더 아래에 template2023폴더 생성
+VSCode로 프로젝트 열때도 위 경로에서 열어야 에러없음
+항상 E:\workspace_java\chat221228\src\main\react-front 열어야 함
+2. yarn init --force 엔터
+그냥 엔터를 계속 치면 디폴트값으로  package.json에 등록됨
+  "description": "chat221128프로젝트와리액트프로젝트연동",
+  "main": "index.js",
+  "author": "slalom0914 <slalom0914@gmail.com>",
+  "license": "MIT"
+실행하기
+yarn start엔터
+http://localhost:3000/index.html실행됨 -> div id="root"
+ReactDOM.createRoot(rootElement).render(element(<Paint/> <Nice/>))
+index.html -> index.js -> BrowserRouter 로 App.jsx감쌈 -> App.jsx에서 Route통해 페이지 링크
+3. react-router-dom 설치 -  웹페이지 제작 필수 - 화면전환 - 링크도 포함
+index.js에 BrowserRouter추가하기 - 단 App.jsx를 감싸준다
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+4. CSS추가분
+React-BootStrap
+yarn add react-bootstrap
+만일 React-BootStrap에 미지원 부분에 대해서는 bootstrap을
+설치하여 사용자 정의 CSS로 처리한다
+yarn add bootstrap -> css라이브러리 설치
+CSS를 자바스크립트 문법으로 처리해주는 styled-components 설치
+yarn add styled-components
+5. 폰트어썸 - 무료 이모티콘, 이모지
+yarn add @fortawesome/fontawesome-free
+6. axios 설치 - 비동기 처리 - 톰캣 서버의 서블릿 요청 함
+:fetch API에서 지원안되는 json포맷 지원받음
+Moesif CORS - true/false - 프록시
+주의 : CORS이슈 -  스프링
+import axios from "axios";
+export const jsonDeptList = (params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const response = axios({
+        method: "get",
+        url: process.env.REACT_APP_CHAT221228_IP + "dept/jsonDeptList.st1",
+        params: params,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+7. firebase설치 - 9.17.1
+yarn add firebase
+로그인 인증
+회원가입지원
+RealtimeDatabaseServer - 채팅기능 활용 - 30일
+storage - 이미지, 동영상 - 30일
+.env 사용
+구글 키값
+카카오 키값
+깃 .gitignore등록할 것

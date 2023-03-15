@@ -24,15 +24,14 @@ public class RestBoardController {
 	private BoardLogic boardLogic=null;
 	@GetMapping("jsonBoardList")
 	public String boardList(Model model, @RequestParam Map<String, Object> pMap){//알아서 맵에 담아줌 리쿼스트없이
-		System.out.println("boardList호출");
-		logger.info("boardList 호출");
+		logger.info("jsonBoardList호출");
 		logger.info(pMap.toString());
 	
 		List<Map<String, Object>> bList =null;
 		bList=boardLogic.boardList(pMap);
 		model.addAttribute("bList",bList);
 //		return "forward:boardList.jsp";
-		Gson g=new Gson();
+		Gson g=new Gson();//json형식으로 
 		String temp=g.toJson(bList);
 		return temp;
 	}
