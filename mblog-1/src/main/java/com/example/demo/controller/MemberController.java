@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -28,8 +30,12 @@ public class MemberController {
 		return "redirect:memberList";
 	}
 	@GetMapping("memberList")
-	public String memberList(Model model) {
+	public String memberList(Model model,@RequestParam Map<String, Object> pMap) {
 		logger.info("memberList호출");
-		return "member/memberList";
+		List<Map<String,Object>> mList =null;
+		mList=memberLogic.memberList(pMap);
+		model.addAttribute("mList",mList);
+		//localhost:8000/jstl/memberAction.jsp[webapp] 포워드라서
+		return "forward:/jstl/memberAction.jsp";
 	}
 }
