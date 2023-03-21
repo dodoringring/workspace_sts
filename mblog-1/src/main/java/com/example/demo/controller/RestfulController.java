@@ -29,7 +29,7 @@ public class RestfulController {
 	@GetMapping("get")//upmu[1]
 	public String getTest(MemberVO mVO) {
 		logger.info(mVO.toString());
-		return "get요청"+mVO.getMem_id()+", "+mVO.getMem_pw()+", "+mVO.getMem_name();
+		return "get요청"/*+mVO.getMem_id()+", "+mVO.getMem_pw()+", "+mVO.getMem_name()*/;
 	}
 	//postman에서 테스트 해야만 하며 @RequestBody에 들어갈 값은 Body선택 후 
 	//row체크하고 반드시 JSON선택 후 Json포맷으로 파라미터 넘겨야함- 주의할 것
@@ -38,7 +38,7 @@ public class RestfulController {
 	@PostMapping("post")
 	public String postTest(@RequestBody MemberVO mVO) {//post에서만 RequestBody 를 쓴다.
 		logger.info(mVO.toString());
-		return "post요청 : "+mVO.getMem_id()+","+mVO.getMem_pw()+","+mVO.getMem_name();
+		return "post요청 : "/*+mVO.getMem_id()+","+mVO.getMem_pw()+","+mVO.getMem_name()*/;
 	}
 	
 }
