@@ -1,22 +1,23 @@
 //상태는 createStore()안에 있다.
-const createStore=()=>{
- let state;//상태를 담아두는 저장소
+const createStore=()=>{ //배치 위치는 index.js배치-store생성
+ let state;//상태를 담아두는 저장소 상태=데이터
  //함수를 담아두는 배열 선언
  let handlers=[] 
 
- //상태를 바꾸는 일을 send함수가 한다.
+ //상태를 바꾸는 일을 send함수가 한다.-useSelector훅을 통해서
  const send=(action)=>{
   //새로운 객체가 만들어진다. 똑같은 state인데 대입연산자로 치환됐다. 새로운 state이다.
   /*Map m= new HahMap()
   m=new HashMap()*/
   console.log("send호출");
   state=worker(state, action)
-  handlers.forEach(handler=>handler())
+  //나에게 구독 신청한 사람들에게 알려줌
+  handlers.forEach(handler=>handler())//()붙어있다=>함수호출
 
  }
 
- const subscribe=((handler)=>{
-  handlers.push(handler);
+ const subscribe=((handler)=>{//여기서 핸들러 배열에 담아줌. 핸들러가 콜백함수 useDispatch훅
+  handlers.push(handler);//push함수-Array내장함수 배열에 넣을때
  })
 
  const getState=()=>{
@@ -29,7 +30,15 @@ const createStore=()=>{
     getState,/*함수-상태정보를 담은  state를 반환해줌 어떻게 알고 얘를 호출하지...? 알아서 제공해줘야... */
     subscribe
   }
-}
+}//end of Store
+//Store
+//상태를 담을 변수를 선언
+//콜백함수를 담믈 배열 선언
+//send함수 구현-action이 파라미터로 들어옴
+//구독-발행모델(상태변화있으면 알려줘)-subscribe-handler콜백함수-얘를 통해서 처리
+//서브스크라이브를 통해서 들어온 콜백함수는 handler배열에 담긴다.
+//getState함수를 통해서 state값을 반환 받을수있다.
+//return{send,subscribe,getState}
 
 const worker = (state={count:0},action)=>{//state가 undefined되는것을 방지위해 (count)객체선언
   //무엇을 해야하나요? 참조무결성이 깨지는것 방지로 새로운 상태를 반환해라. 예상치못한 side-effect때문에 반드시 새로운 상태를 반환해줘라
@@ -54,6 +63,8 @@ store.subscribe(function(){
 })
 
 //action의 내용은 send 에서만듦 {}안에값을 action으로 넘긴다.
+//사용자가 버튼을 클릭 했을때 시그널 발생함-type정해서value를 store에 전달한다.
+//store가 받아서 전변으로 관리가됨-G컴포넌트에서 즉시 사용 가능하다.
 store.send({type : 'increase'})//시그널 주기 - action
 store.send({type : 'increase'})//Action을 dispatcher 가 전달한다.
 store.send({type : 'decrease'})

@@ -12,7 +12,7 @@ function App({imageUploader}){
   <Routes>
   <Route path='/' exact={true} element={<LoginPage/>}/>
   <Route path='/home' exact={true} element={<HomePage/>}/>
-  <Route path='/dept' exact={true} element={<DeptPage/>}/>
+  <Route path='/dept/:gubun' exact={true} element={<DeptPage imageUploader={imageUploader} />}/>
   <Route path='/auth/kakao/callback' exact={true} element={<KakaoRedirectHandler/>}/>
   <Route path='/member' exact={true} element={<MemberPage imageUploader={imageUploader} />}/>
   <Route path='/profile' exact={true} element={<Profile />}/>
