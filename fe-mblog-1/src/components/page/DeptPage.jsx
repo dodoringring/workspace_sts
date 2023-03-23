@@ -8,7 +8,22 @@ import { deptInsertDB, deptListDB } from '../../service/dbLogic'
 import { useNavigate, useParams } from 'react-router-dom'
 import { MyInput, MyLabel, MyLabelAb } from '../styles/FromStyle'
 import { validateDname } from '../../service/validateLogic'
+import styled from 'styled-components'
+import BlogFooter from '../include/BlogFooter'
 
+const DivUploadImg=styled.div`
+  display:flex;
+  width:200px;
+  height:250px;
+  align-items:center;
+  overflow:hidden;
+  margin:10px auto;
+`
+const Img=styled.img`
+  width:100%;
+  height:100%;
+  object-fit:cover;
+`
 const DeptPage = ({imageUploader}) => {
   //화면전환시나 가급적 전체페이지 리로딩을 하지 않음
   //navigate 훅을 사용하면 됨
@@ -234,9 +249,11 @@ const DeptPage = ({imageUploader}) => {
               <Form.Label>건물이미지</Form.Label>
                 <input className="form-control" type="file" accept='image/*' id="dimg" name="dimg" onChange={imgChange}/>
             </Form.Group>
-            <div id="uploadImg">
+            <DivUploadImg id="uploadImg">
+         
               <img className='thumbNail' src="http://via.placeholder.com/200X250" alt="미리보기" />
-            </div>
+            </DivUploadImg>
+        
           </div>
 
           </Modal.Body>
@@ -250,6 +267,7 @@ const DeptPage = ({imageUploader}) => {
           </Modal.Footer>
         </Modal>     
       {/* ========================== [[ 부서등록 Modal ]] ========================== */}  
+            <BlogFooter/>
     </>
   )
 }
