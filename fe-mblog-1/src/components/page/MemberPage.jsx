@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { jsonMemberListDB } from '../../service/dbLogic'
+import { memberListDB } from '../../service/dbLogic'
+import BlogFooter from '../include/BlogFooter'
+import BlogHeader from '../include/BlogHeader'
 // import ImageUploader from '../../service/imageUploader'
 
 const MemberPage = ({imageUploader}) => {
@@ -7,7 +9,7 @@ const MemberPage = ({imageUploader}) => {
 
   useEffect(()=>{
     const memberList=async()=>{
-      const res=await jsonMemberListDB(member)
+      const res=await memberListDB(member)
       console.log(res.data);
     }
     memberList()
@@ -17,13 +19,15 @@ const MemberPage = ({imageUploader}) => {
     console.log(event.target.files[0]);
     //async가 붙은 함수안에서만 await을 사용할 수 있음-파일이 업로드 될 때 까지 기다림
     const uploaded=await imageUploader.upload(event.target.files[0])
-    //-선택한 이밎의 싱제 아이디가 아닌 COULDINARY
+    //-선택한 이미지의 실제 아이디가 아닌 COULDINARY
     console.log(`${uploaded.public_id} ${uploaded.format} ${uploaded.url}`);
   }
   return (
     <>
+      <BlogHeader/>
       <h3>회원관리페이지입니다.</h3>
       <input type="file" name="mimg" id="mimg" onChange={imgChange} />
+      <BlogFooter/>
     </>
   )
 }

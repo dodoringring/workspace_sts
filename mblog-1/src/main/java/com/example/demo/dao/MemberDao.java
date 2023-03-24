@@ -20,10 +20,22 @@ public class MemberDao {
 		List<Map<String,Object>> mList = sqlSessionTemplate.selectList("memberList", pMap);
 		return mList;
 	}
-	public int memberInsert(Map<String, Object> pMap) {
+	public int memberInsert(Map<String, Object> pMap) {//insert는 return타입이 object이다. 그래서 update쓰자
 		logger.info("memberInsert호출");
 		int result = 0;
-		
+		result=sqlSessionTemplate.update("memberInsert",pMap);
+		return result;
+	}
+	public int memberUpdate(Map<String, Object> pMap) {
+		logger.info("memberUpdate호출");
+		int result = 0;
+		result=sqlSessionTemplate.update("memberUpdate",pMap);
+		return result;
+	}
+	public int memberDelete(Map<String, Object> pMap) {
+		logger.info("memberDelete호출");
+		int result = 0;
+		result=sqlSessionTemplate.delete("memberDelete",pMap);
 		return result;
 	}
 	
