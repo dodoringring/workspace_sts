@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+	<select id="currentDate" parameterType="java.util.HashMap" resultType="map">
+		SELECT to_char(sysdate, 'YYYY-MM-DD') FROM dual
+	</select>
+	<!-- 
+		사용자가 입력한 값을 받아올 때 parameterType에 해당 타입을 적는다
+		만일 사용자 정의 클래스라면(예:MemberVO) 패키지를 포함하는 fullname으로 작성함
+	 -->
+<!-- 	<select id="memberList" parameterType=com.vo.MemberVO" resultType="map"> -->
+<!-- 	<select id="memberList" parameterType=int" resultType="map"> --><!-- 원시형일 때 랩퍼클래스에 한해서 -->
+<!-- 	<select id="memberList" parameterType=java.lang.Integer" resultType="map"> -->
+		<select id="memberList" parameterType="java.util.HashMap" resultType="map">
+		SELECT mem_id, mem_num, mem_name from member
+		<where>
+			<if test='mem_num > 0'>
+				mem_num = #{mem_num}
+			</if>
+		</where>
+	</select>
+	<select id="memberList2" parameterType="java.util.HashMap" resultType="com.vo.MemberVO">
+		SELECT mem_id, mem_num, mem_name from member
+		<where>
+			<if test='mem_num > 0'>
+				mem_num = #{mem_num}
+			</if>
+		</where>
+		ORDER BY mem_num desc
+	</select>
+</mapper>

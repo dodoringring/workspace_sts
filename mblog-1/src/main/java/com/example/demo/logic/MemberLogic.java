@@ -4,54 +4,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.MemberDao;
 
-/*
- * 모델계층(MemberLogic[직접 오라클과 연동하지 않음] + MemberDao[데이터셋])
- * 공통된 관심사 분리(AspectJ 프레임워크 - 오픈소스 참고)
- * 트랜잭션 처리 지원받음
- */
 @Service
 public class MemberLogic {
-	Logger logger = LoggerFactory.getLogger(MemberLogic.class);
+	Logger log = LogManager.getLogger(MemberLogic.class);
 
 	@Autowired
-	private MemberDao memberDao = null;
+	private MemberDao md = null;
 	
-	public List<Map<String, Object>> memberList(Map<String, Object> pMap) {
-		logger.info("memberList 호출");
-		List<Map<String,Object>> bList = new ArrayList<>();
-		bList= memberDao.memberList(pMap);
-		return bList;
-	}
-	
-	public int memberInsert(Map<String, Object> pMap) {
-		logger.info("memberInsert 호출");
-		logger.info(pMap.toString());
+	public int memberInsert(Map<String, Object> pmap) {
+		log.info("memberInsert called");
 		int result = 0;
-		result = memberDao.memberInsert(pMap);
+		log.info(pmap);
+		result = md.memberInsert(pmap);
 		return result;
 	}
 
-	public int memberUpdate(Map<String, Object> pMap) {
-		logger.info("memberUpdate 호출");
-		logger.info(pMap.toString());
+	public List<Map<String, Object>> memberList(Map<String, Object> pmap) {
+		log.info("memberList called" + pmap);
+		List<Map<String, Object>> rlist = new ArrayList<>();
+		rlist = md.memberList(pmap);
+		return rlist;
+	}
+
+	public int memberUpdate(Map<String, Object> pmap) {
+		log.info("memberUpdate called");
 		int result = 0;
-		result = memberDao.memberUpdate(pMap);
+		log.info(pmap);
+		result = md.memberUpdate(pmap);
 		return result;
 	}
 
-	public int memberDelete(Map<String, Object> pMap) {
-		logger.info("memberDelete 호출");
-		logger.info(pMap.toString());
+	public int memberDelete(Map<String, Object> pmap) {
+		log.info("memberDelete called");
 		int result = 0;
-		result = memberDao.memberDelete(pMap);
+		log.info(pmap);
+		result = md.memberDelete(pmap);
 		return result;
 	}
-	
+
 }

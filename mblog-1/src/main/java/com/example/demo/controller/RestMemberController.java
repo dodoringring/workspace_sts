@@ -1,14 +1,15 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.logging.log4j.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,55 +17,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.logic.BoardLogic;
 import com.example.demo.logic.MemberLogic;
 import com.google.gson.Gson;
 
 @RestController
 @RequestMapping("/member/*")
 public class RestMemberController {
-	Logger logger = LogManager.getLogger(RestMemberController.class);
+//	Logger log = LoggerFactory.getLogger(RestMemberController.class);
+	Logger log = LogManager.getLogger(RestMemberController.class);
 	
-	@Autowired//자동으로 의존성을 주입
-	private MemberLogic memberLogic = null;
+	
+	@Autowired
+	private MemberLogic ml = null;
+	
 	@PostMapping("memberInsert")
-	public String memberInsert(@RequestBody Map<String, Object> pMap) {
-		//리액트에서 body에 객체리터럴{}로 넘겨준 정보를 Map이나 VO에 담을 수 있다. 
-		logger.info("memberInsert");
-		logger.info(pMap.toString());
-		int result=0;
-		result=memberLogic.memberInsert(pMap);
-		logger.info(result);
-		return String.valueOf(result);
-	}
-
-	@PostMapping("memberUpdate")
-	public String memberUpdate (@RequestBody Map<String, Object> pMap) {
-		logger.info("memberUpdate => " + pMap);
+	public String memberInsert (@RequestBody Map<String, Object> pmap) {//리액트에서 body에 {}로 넘어와도 VO가 아니어도
+		log.info("memberInsert called => " + pmap);
 		int result = 0;
-		result=memberLogic.memberUpdate(pMap);
-		logger.info(result);
+		result = ml.memberInsert(pmap);
 		return String.valueOf(result);
 	}
-	@GetMapping("memberList")
-	public String MemberList(@RequestParam Map<String,Object> pMap) {
-		logger.info("memberList 호출");
-		String temp = null;
-		List<Map<String, Object>> mList = new ArrayList<>();
-		Map<String, Object> rmap = new HashMap<>();
-		mList = memberLogic.memberList(pMap);
-		Gson g = new Gson();
-		temp = g.toJson(mList);
-		return temp;
+	
+	@PostMapping("memberUpdate")
+	public String memberUpdate (@RequestBody Map<String, Object> pmap) {
+		log.info("memberUpdate called => " + pmap);
+		int result = 0;
+		result = ml.memberUpdate(pmap);
+		return String.valueOf(result);
 	}
+	
 	@GetMapping("memberDelete")
-	public String memberDelete(@RequestParam Map<String,Object> pMap) {
-		logger.info("memberDelete 호출");
-		logger.info("memberDelete");
-		logger.info(pMap.toString());
-		int result=0;
-		result=memberLogic.memberDelete(pMap);
-		logger.info(result);
+	public String memberDelete (@RequestParam Map<String, Object> pmap) {
+		log.info("memberDelete called => " + pmap);
+		int result = 0;
+		result = ml.memberDelete(pmap);
 		return String.valueOf(result);
+	}
+	
+	//localhost:8000/member/memberList
+	//리액트 프로젝트에서 닉네임 중복검사시 사용하는 메소드 구현입니다
+	//리액트에서 넘기는 파라미터는 { MEM_NICKNAME: memInfo[key], type: 'overlap' }
+	//RESTController의 경우 문자열도 바로 출력 가능함. rest가 아닌 컨트롤러는 화면으로 연결됨.
+	@GetMapping("memberList")
+	public String jsonMemberList (@RequestParam Map<String, Object> pmap) {
+		log.info("memberList called ===>" + pmap);
+		String temp = null;
+		List<Map<String, Object>> mList = new ArrayList<>();//mlist.size() = 0
+		mList = ml.memberList(pmap);
+		//파라미터로 넘어온 키위가 회원 집합에 존재하면 조회결과가 있다 => mList.size() == 1 or 0
+		if(mList.size() > 0) {
+			Gson g = new Gson();
+			temp = g.toJson(mList);			
+		} else {
+			temp = "0";
+		}
+		return temp;
 	}
 }

@@ -13,32 +13,39 @@ import com.example.demo.vo.DeptVO;
 
 @Repository
 public class DeptDao {
-	Logger logger=LoggerFactory.getLogger(DeptDao.class);
+	Logger log = LoggerFactory.getLogger(DeptDao.class);
+	
 	//DatabaseConfiguration에서 @Configuration으로 빈등록된 객체 주입받기 코드임
-	//application.properties에서 물리적으로 떨어져있는 오라클 서버정보받음
-	//DML문을 가진 xml문은 src/main.resources아래 있음
+	//application.properties에서 물리적으로 떨어져 있는 오라클 서버 정보 받음
+	//DML문을 가진 xml은 src/main/resources아래 있음.
+	
 	@Autowired
-	private SqlSessionTemplate sqlSessionTemplate=null;
-	public int deptInsert(DeptVO pVO) {
-		int result=0;
-		result=sqlSessionTemplate.update("deptInsert",pVO);
+	private SqlSessionTemplate sst = null;
+
+	public int deptInsert(DeptVO dvo) {
+		int result = 0;
+		result = sst.update("deptInsert", dvo);
 		return result;
 	}
-	public List<Map<String, Object>> deptList(Map<String, Object> pMap) {
-		List<Map<String, Object>> dList=null;
-		dList = sqlSessionTemplate.selectList("deptList",pMap);		
-		return dList;
+
+	public List<Map<String, Object>> deptList(Map<String, Object> pmap) {
+		List<Map<String, Object>> dlist = null;
+		dlist = sst.selectList("deptList", pmap);
+		return dlist;
 	}
-	public int deptUpdate(DeptVO pdVO) {
-		int result=0;
-		result=sqlSessionTemplate.update("deptUpdate",pdVO);
-		logger.info(""+result);
+
+	public int deptUpdate(DeptVO dvo) {
+		log.info(dvo.toString());
+		int result = 0;
+		result = sst.update("deptUpdate", dvo);
+		log.info(result + "");
 		return result;
 	}
+
 	public int deptDelete(int deptno) {
-		int result=0;
-		result=sqlSessionTemplate.delete("deptDelete",deptno);
-		logger.info(""+result);
+		int result = 0;
+		result = sst.delete("deptDelete", deptno);
+		log.info(result + "");
 		return result;
 	}
 	

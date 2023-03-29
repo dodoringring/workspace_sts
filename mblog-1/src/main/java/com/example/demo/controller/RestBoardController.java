@@ -18,27 +18,28 @@ import com.google.gson.Gson;
 @RestController
 @RequestMapping("/board/*")
 public class RestBoardController {
-	Logger logger=LoggerFactory.getLogger(RestBoardController.class);
+	Logger logger = LoggerFactory.getLogger(RestBoardController.class);
 	
 	@Autowired
-	private BoardLogic boardLogic=null;
-	@GetMapping("jsonBoardList")
-	public String boardList(Model model, @RequestParam Map<String, Object> pMap){//알아서 맵에 담아줌 리쿼스트없이
-		logger.info("jsonBoardList호출");
-		logger.info(pMap.toString());
+	private BoardLogic boardLogic = null;
 	
-		List<Map<String, Object>> bList =null;
-		bList=boardLogic.boardList(pMap);
-		model.addAttribute("bList",bList);
+	@GetMapping("jsonBoardList")
+	public String boardList(Model model, @RequestParam Map<String,Object> pMap) {
+		logger.info("jsonBoardList");
+		logger.info(pMap.toString());
+		List<Map<String,Object>> bList = null;
+		bList = boardLogic.boardList(pMap);
+		model.addAttribute("bList", bList);
 //		return "forward:boardList.jsp";
-		Gson g=new Gson();//json형식으로 
-		String temp=g.toJson(bList);
+		Gson g = new Gson();
+		String temp = g.toJson(bList);
 		return temp;
 	}
 	
 	@GetMapping("getTest")
 	public String getTest() {
-		System.out.println("getText호출");
+		logger.info("getText호출");
 		return "테스트";
 	}
+	
 }

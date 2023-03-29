@@ -13,27 +13,33 @@ import com.example.demo.vo.DeptVO;
 
 @Service
 public class DeptLogic {
-	Logger logger=LoggerFactory.getLogger(DeptLogic.class);
+	Logger log = LoggerFactory.getLogger(DeptLogic.class);
+	
 	@Autowired
-	DeptDao deptDao=null;
-	public int deptInsert(DeptVO pMap) {
-		int result=0;
-		result=deptDao.deptInsert(pMap);
+	DeptDao ddo = null;
+	
+	public int deptInsert(DeptVO dvo) {
+		int result = 0;
+		result = ddo.deptInsert(dvo);
 		return result;
 	}
-	public List<Map<String, Object>> deptList(Map<String, Object> pMap) {
-		List<Map<String,Object>> dList=null;
-		dList=deptDao.deptList(pMap);
-		return dList;
+
+	public List<Map<String, Object>> deptList(Map<String, Object> pmap) {
+		List<Map<String, Object>> dlist = null;
+		dlist = ddo.deptList(pmap);
+		return dlist;
 	}
-	public int deptUpdate(DeptVO pdVO) {
-		int result=0;
-		result=deptDao.deptUpdate(pdVO);
+
+	public int deptUpdate(DeptVO dvo) {
+		log.info(dvo.toString());
+		int result = 0;
+		result = ddo.deptUpdate(dvo);
 		return result;
 	}
+
 	public int deptDelete(int deptno) {
-		int result=0;
-		result=deptDao.deptDelete(deptno);
+		int result = 0;
+		result = ddo.deptDelete(deptno);
 		return result;
 	}
 }

@@ -39,7 +39,7 @@ public class AuthController {
 		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
-		params.add("client_id", "c0ea2a3796097cbf703150a82df26374");
+		params.add("client_id", "b3e896a3ff7e1e4900774564a1a6028c");
 		params.add("redirect_uri", "http://localhost:8000/auth/kakao/callback");
 		params.add("code", code);
 		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기

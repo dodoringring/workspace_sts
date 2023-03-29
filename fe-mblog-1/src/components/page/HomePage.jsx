@@ -1,19 +1,29 @@
 import React from 'react'
-import "bootstrap/dist/css/bootstrap.min.css";
-import BlogHeader from '../include/BlogHeader';
-import { ContainerDiv, FormDiv, HeaderDiv } from '../styles/FromStyle';
+import { useNavigate } from 'react-router-dom';
+import BlogHeader from '../include/BlogHeader'
 import KakaoMap from '../kakao/KakaoMap';
-
+import {ContainerDiv, FormDiv, HeaderDiv} from '../styles/FormStyle';
 
 const HomePage = () => {
+  const member=window.localStorage.getItem('member')
+  console.log(JSON.stringify(member));
+  const jsonDoc=JSON.parse(member)
+  console.log(jsonDoc.mem_id+','+jsonDoc.mem_pw);
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    console.log('login 요청');
+    navigate('/login');
+  }
+
   return (
     <>
       <ContainerDiv>
         <BlogHeader/>
           <HeaderDiv>
-            <h2 style={{marginLeft:"10px"}}>로그인 성공 후 이동 페이지</h2>
+            <h2 style={{marginLeft:"10px"}}>보쌈 맛있겠다~!</h2>
+            <button onClick={handleLogin}>로그인</button>
           </HeaderDiv>
-          <FormDiv style={{textAlign:'center'}}>
+          <FormDiv style={{textAlign:"center"}}>
             <div>이벤트존</div>
             <hr style={{height:"2px"}}/>
             <div>추천 수업</div>
@@ -27,4 +37,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage;
+export default HomePage

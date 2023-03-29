@@ -14,22 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.logic.BoardLogic;
 
-
-@Controller//컨트롤러라고 알려주는. step3에서 컨트롤러를 오버라이드 한것 대신 어노테이션.
+@Controller
 @RequestMapping("/board/*")
 public class BoardController {
-	Logger logger=LoggerFactory.getLogger(BoardController.class);
+	Logger logger = LoggerFactory.getLogger(BoardController.class);
 	@Autowired
-	private BoardLogic boardLogic=null;
+	private BoardLogic boardLogic = null;
 	@GetMapping("boardList")
-	public String boardList(Model model, @RequestParam Map<String, Object> pMap){//알아서 맵에 담아줌 리쿼스트없이
-		System.out.println("boardList호출");
-		logger.info("boardList 호출");
+	public String boardList(Model model, @RequestParam Map<String,Object> pMap) {
+		logger.info("boardList");
 		logger.info(pMap.toString());
-	
-		List<Map<String, Object>> bList =null;
-		bList=boardLogic.boardList(pMap);
-		model.addAttribute("bList",bList);
+		List<Map<String,Object>> bList = null;
+		bList = boardLogic.boardList(pMap);
+		model.addAttribute("bList", bList);
 //		return "forward:boardList.jsp";
 		return "board/boardList";
 	}

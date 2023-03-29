@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration //빈태그쓸때 컨피그레이션 반드시 있어야한다.
+@Configuration
 @SpringBootApplication
 public class Mblog1Application {
 
@@ -16,14 +16,14 @@ public class Mblog1Application {
 	}
 
 	@Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-         //포트 번호는 여기에서 바꿔 줄 것
-            	registry.addMapping("/**").allowedOrigins("http://localhost:3000");
-}
-};
-}
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				//포트 번호는 여기에서 바꿔줄 것.
+				registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+			}
+		};
+	}
 
 }

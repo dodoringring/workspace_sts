@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>계층형게시판(webapp))</title>
+<title>계층형 게시판(webapp)</title>
 </head>
 <body>
-<h3>계층형 게시판</h3>
+<h3>계층형 게시판(webapp)</h3>
 </body>
 </html>

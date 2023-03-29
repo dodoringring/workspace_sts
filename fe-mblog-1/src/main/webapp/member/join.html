@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<script type="text/javascript">
+	//원시적 방식
+	function join(){
+		console.log("join");
+	}
+	//arrow function
+	join = () => {
+		const fm = document.querySelector("#f_join");
+		fm.submit();
+		//console.log("arrow join");
+	}
+	// addEventListener -> 건건 처리
+	// onclick -> 중복될 경우 하나만 처리
+</script>
+</head>
+<body>
+<!-- 
+Restful API에서 제안하는 메소드 중 하나 get방식
+쿼리스트링을 통해 사용자가 입력한 값을 전달함
+주소창에 모두 노출됨 - 보안에 취약함
+쿼리스트링을 통해 넘길 수 있는 값에 한계가 있음 - 브라우저마다 다름
+단위 테스트 가능함
+링크를 걸 수 있음 - post방식은 불가함
+action : 서버쪽으로 전달해서 아래 요청을 처리하는 페이지 URL 작성함
+ -->
+<form id="f_join" method="get" action="./joinAction.jsp">
+	<label>아이디</label>
+	<input type="text" id="mem_id" name="mem_id" placeholder="아이디" required><br>
+	<label>비밀번호</label>
+	<input type="password" id="mem_pw" name="mem_pw" placeholder="비밀번호" required><br>
+	<label>이름</label>
+	<input type="text" id="mem_name" name="mem_name" placeholder="이름" required><br>
+	<label>생년월일</label>
+	<input type="date" id="mem_birth" name="mem_birth" required><br>
+	<label>프로필 사진</label>
+	<input type="file" id="mem_img" name="mem_img" placeholder="프로필 사진" required><br>
+	<label>우편번호</label>
+	<input type="text" id="mem_zipcode" name="mem_zipcode" placeholder="우편번호"><button>찾기</button><br>
+	<label>주소</label>
+	<input type="text" id="mem_address" name="mem_address" size="60" placeholder="주소"> <br>
+	<button id="btnJoin" class="cbtnJoin" onclick="join()">가입하기</button>
+	<script type="text/javascript">
+		//const joinBtn = document.querySelector("#btnJoin");
+		const joinBtn = document.querySelector(".cbtnJoin");
+		console.log(joinBtn);
+		joinBtn.addEventListener('click', () => {
+			console.log("가입버튼 호출");
+		})
+		joinBtn.addEventListener('click', () => {
+			console.log("가입버튼 호출2");
+		})
+	</script>
+</form>
+</body>
+</html>

@@ -1,25 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, java.util.Map" %>
+<%@ page import="java.util.*" %>
 <%
-
-	List<Map<String, Object>> bList=null;
-	bList=(List<Map<String,Object>>)request.getAttribute("bList");
-	if(bList!=null){
-		for(int i=0; i<bList.size();i++){
-			Map<String, Object> rMap=bList.get(i);
+	List<Map<String, Object>> bList = null;
+	bList = (List<Map<String, Object>>)request.getAttribute("bList");
+	if(bList != null) {
+		for(int i = 0; i < bList.size(); i++){
+			Map<String, Object> rMap = bList.get(i);
 			out.print(rMap.get("BM_TITLE"));
+			out.print("<br>");
 			out.print(rMap.get("BM_WRITER"));
+			out.print("<br>");
+			out.print("<br>");
 		}
 	}
-    %>
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>계층형게시판(WEB-INF)</title>
+<title>계층형 게시판(WEB-INF)</title>
 </head>
 <body>
-<h3>계층형 게시판</h3>
+<h3>계층형 게시판(WEB-INF)</h3>
 </body>
 </html>

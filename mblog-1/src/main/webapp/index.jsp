@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charsetUTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-mblog-1 server start!!
+mblog-1 server start!!!
 </body>
 </html>

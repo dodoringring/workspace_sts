@@ -1,3 +1,3 @@
-export const INCRAESE='increase'
-export const DECRAESE='decrease'
-export const RESET='reset'
+export const INCREASE = "increase";
+export const DECREASE = "decrease";
+export const RESET = "reset";

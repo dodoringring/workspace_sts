@@ -1,0 +1,165 @@
+/* 1 */
+body {
+    background-color: #eeeeee;
+  }
+  
+  /* 27 */
+  input[type="submit"]:hover,
+  button:hover {
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  /* 26 */
+  .bg {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: url(../../../public/images/login/Fotolia_235948322_XL.jpg) no-repeat center;
+    background-size: cover;
+  }
+  
+  /* 2 모두 침 실행했을 때 화면에 중앙에 배치됨을 설명*/
+  .login__form {
+    position: absolute;
+    width: 100%;
+    max-width: 360px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* 폭만큼 왼쪽으로 밀어줌 */
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 4px;
+  }
+  /* 3 모두 침 */
+  .login__form h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 20px;
+  }
+  
+  /* 4  3번의 하위 태그임을 설명 */
+  .login__form p {
+    margin-bottom: 40px;
+  }
+  
+  /* 5 */
+  label {
+    font-size: 12px;
+    color: #767676;
+    display: block;
+    margin-bottom: 40px;
+  }
+  
+  /* 6 */
+  input[type="email"] {
+    width: 100%;
+    display: block;
+    height: 32px;
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  /* 7 */
+  input[type="email"]:hover {
+    border-bottom: 1px solid #aaaaaa;
+  }
+  
+  /* 8 */
+  input[type="email"]:focus {
+    border-bottom: 2px solid #004fff;
+    outline: none;
+  }
+  
+  /* 9 */
+  .btn__submit {
+    width: 80px;
+    padding: 8px;
+    color: white;
+    background-color: #004fff;
+    border: none;
+    border-radius: 20px;
+    float: right; /*  float으로 처리하면 항상 하위에 있는 게 밀린다 그래서 하위 .divider에 clear: both를 하는 거임*/
+    margin-bottom: 30px;
+  }
+  
+  /* 10 */
+  /* submit버튼에 float를 주면 밀리는데 이때 clear  both로 해결 */
+  .divider {
+    position: relative; /* hr선이 화면 안으로 들어옴 */
+    clear: both;
+    text-align: center; /*  또는를 가운데로 보냄 */
+    margin-bottom: 20px;
+  }
+  
+  /* 11 hr를 붕 띄워서 가운데로 보낸다*/
+  .divider hr {
+    position: absolute;
+    width: 100%; /* hr선이 밀려나는데 부모인 divider에 relative줌 */
+    height: 1px;
+    border: none;
+    background-color: #dddddd;
+    z-index: 1;
+  }
+  
+  /* 12 여기까지 작성하고 다시 html로 이동하여 구글, 페이스북 버튼 작업 */
+  .divider span {
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    color: #4b4b4b;
+    background-color: #ffffff;
+    z-index: 2; /* 숫자가 큰게 위로 올라옴 그래서 또는이 위로 올라옴 - position있을때만 먹음*/
+  }
+  
+  /* 13 loginForm.html작업 마저하고 여기부터 코딩함 */
+  .login__form button {
+    width: 100%;
+    height: 48px;
+    font-size: 16px; /* 18 */
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-radius: 24px; /* 15 */
+    display: flex; /* 19 */
+    justify-content: center; /* 20 */
+    align-items: center; /* 21 */
+  }
+  /* 17 */
+  .btn__google {
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+  }
+  /* 16 */
+  .btn__facebook {
+    background-color: #3b5998;
+    border: 1px solid #3b5998; /* 16-1 */
+    color: #fff;
+  }
+  
+  /* 14 */
+  .icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px; /* 22 */
+    background-color: red;
+  }
+  
+  /* 23 */
+  .icon-google {
+    background: url(../../../public/images/login/icon-google.svg) no-repeat center/20px; /* size는 20px로 들어감 */
+  }
+  
+  /* 24 */
+  .icon-facebook {
+    background: url(../../../public/images/login/icon-facebook.svg) no-repeat center/30px; /* size는 20px로 들어감 */
+  }
+  
+  /* 25 */
+  .captcha__text {
+    font-size: 12px;
+    color: #767676;
+    line-height: 1.5;
+    margin-top: 40px;
+  }
+  

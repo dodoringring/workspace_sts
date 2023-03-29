@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo">
-<!-- 맵으로 받을때  @RequestParam 쓴다. VO는 @RequestBody(post방식-데이터로 넘김) -->
-<delete id="deptDelete" parameterType="int">
-	DELETE from dept
-	<where>
-		<if test='deptno!=null and value>0'>
-		 AND deptno=#{value}
-		</if>
-	</where>
-</delete>
-	<update id="deptUpdate" parameterType="map">
-	UPDATE dept
-		SET dname=#{dname}
-		,loc=#{loc}
-		<if test='filename!=null '>
-		 ,filename=#{filename}
-		</if>
-		<if test='fileurl!=null'>
-		 ,fileurl=#{fileurl}
-		</if>
-	<where>
-		<if test='deptno!=null and deptno>0'>
-		 AND deptno=#{deptno}
-		</if>
-	</where>
-</update>
-	<select id="deptList" parameterType="map" resultType="map">
-		select deptno, dname, loc, filename, fileurl from dept
+	<!-- map으로 받거나 vo로 받거나... map으로 받을 때는 requestParam...을 사용... 그럴 땐 vo 못씀. responseBody(POST)는 vo사용가능. -->
+	<delete id="deptDelete" parameterType="int">
+		DELETE FROM dept
+		<where><!-- map이 아니라서 키값이 없기때문에 value로 바꿔봄. 원시형은 부르면 값이 나오기 때문에... -->
+			<if test="value != null and value > 0">
+				AND deptno = #{value}
+			</if>
+		</where>
+	</delete>
+	<update id="deptUpdate" parameterType="com.example.demo.vo.DeptVO">
+		UPDATE dept
+		   SET dname = #{dname},
+		       loc = #{loc}
+			<if test="filename != null">
+				, filename = #{filename}
+			</if>
+			<if test="fileurl != null">
+				, fileurl = #{fileurl}
+			</if>
 		<where>
-			<if test="deptno!=null and deptno>0">
-				AND 	deptno =#{deptno}
+			<if test="deptno != null and deptno > 0">
+				deptno = #{deptno}
 			</if>
-			<if test='gubun!=null and gubun.equals("dname")'>
-				AND 	dname LIKE '%'||#{keyword}||'%'
+		</where>
+	</update>
+	<select id="deptList" parameterType="map" resultType="map">
+		SELECT deptno, dname, loc, filename, fileurl from dept
+		<where>
+			<if test="deptno != null and deptno > 0">
+				AND deptno = #{deptno}
 			</if>
-			<if test='gubun!=null and gubun.equals("loc")'>
-				AND loc LIKE '%'||#{keyword}||'%'
-			</if>
-			<if test='gubun!=null and gubun.equals("deptno")'>
+			<if test="gubun != null and gubun.equals('deptno')">
 				AND deptno LIKE '%'||#{keyword}||'%'
 			</if>
-			
+			<if test="gubun != null and gubun.equals('dname')">
+				AND dname LIKE '%'||#{keyword}||'%'
+			</if>
+			<if test="gubun != null and gubun.equals('loc')">
+				AND loc LIKE '%'||#{keyword}||'%'
+			</if>
 		</where>
+		ORDER BY deptno desc
 	</select>
 	<insert id="deptInsert" parameterType="com.example.demo.vo.DeptVO">
-			INSERT INTO dept(deptno, dname, loc 
-										<if test="filename !=null">
-											,filename
-										</if>
-										<if test="fileurl !=null">
-											,fileurl
-										</if>										
-											) 
-								VALUES(#{deptno}, #{dname},#{loc}
-								          <if test="filename!=null">
-								          ,#{filename}
-								          </if>
-								          <if test="fileurl!=null">								          
-								          ,#{fileurl}
-								          </if>
-								          )
+		INSERT INTO dept (deptno, dname, loc
+				<if test="filename != null">
+					, filename
+				</if>
+				<if test="fileurl != null">
+					, fileurl
+				</if>
+						  )
+					VALUES (#{deptno}, #{dname}, #{loc}
+				<if test="filename != null">
+					, #{filename}
+				</if>
+				<if test="fileurl != null">
+					, #{fileurl}
+				</if>
+					)
 	</insert>
 </mapper>
