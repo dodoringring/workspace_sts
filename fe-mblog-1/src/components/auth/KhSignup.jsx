@@ -52,7 +52,7 @@ const KhSignup = ({authLogic}) => {
     name: "",
     birthday: "",
     hp: "",
-    nickname: null,
+    nickname: "",
     gender: "없음"
   });
 
@@ -267,18 +267,19 @@ const KhSignup = ({authLogic}) => {
       }
       console.log('입력받은 생일정보 '+birthday);
       const datas = {
-        MEM_UID: uid,
-        MEM_NAME: memInfo.name,
-        MEM_PW: memInfo.password,
-        MEM_EMAIL: memInfo.email,
-        MEM_BIRTHDAY: birthday,
-        MEM_TEL: memInfo.hp,
-        MEM_NICKNAME: memInfo.nickname,
-        MEM_ZIPCODE: post.postNum,
-        MEM_ADDR: post.post,
-        MEM_ADDR_DTL: post.postDetail,
-        MEM_AUTH: (type==='member'?1:2),
-        MEM_GENDER: memInfo.gender
+        mem_uid: uid,
+        mem_name: memInfo.name,
+        mem_pw: memInfo.password,
+        mem_email: memInfo.email,
+        mem_birthday: birthday,
+        mem_tel: memInfo.hp,
+        mem_nickname: memInfo.nickname,
+        mem_zipcode: post.zipcode,
+        mem_addr: post.addr,
+        mem_addr_dtl: post.addrDetail,
+        mem_status: 0,
+        mem_auth: (type==='member'?'member':'teacher'),
+        mem_gender: memInfo.gender
       }
       console.log(datas)
       const response = await memberInsertDB(datas);

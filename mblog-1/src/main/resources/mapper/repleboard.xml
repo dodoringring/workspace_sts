@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo">
+	<select id="qnaList" parameterType="java.util.HashMap" resultType="map">
+		SELECT
+		q.qna_bno, q.qna_title, q.qna_content, q.QNA_TYPE,
+		q.qna_hit, q.qna_date, m.mem_name
+		FROM qna q, MEMBER230324 m
+		where q.mem_no = m.mem_no
+	</select>
+	<!-- 
+	
+	@RequestParam-Map타입이 올 수 있다-get방식 요청 - 요청header담김-인터셉트-캐시에 있는 정보가 다시 출력될 수 있다.
+	:문제점 :노출-URL-보안취약-조회
+	@RequsetParam-type은 Map만 가능 vo안된다.
+	
+	@RequestBody- post방식 요청- 단위 테스트가 불가능하다-그러니까 postman으로 테스트 가능함-요청은 Body에 담긴다.-무조건 서버로 전달이 된다.
+	:VO Map 원시형타입 모두 가능함
+	
+	
+	
+	
+	질문해보기
+			mem_no(member230324)는 어디서 오나요? - 인증을 어디서 하나요?
+			qna_type 즉 질문타입은 상수로 양도를 줌
+			qna_secret에는 비번을 입력받음
+			비번이 널이면 공개 널이 아니면 비공개 처리 가능한가?
+			생각해볼 문제
+			화면에서 가져올 컬럼의 종류는 몇가지 인가요?
+			세션이나 쿠키에서 또는 세션 스토리지에서 가져와야하는 컬럼이 있을까요?
+			상수로 넣을 수 있는 (또는 넣어야 하는 ) 컬럼이 존재하나요?
+			만일 존재한다면 어떤 컬럼인지 말해보세요
+			하나 더 
+			작성자는 입력 받도록 화면을 그려야할까요?
+			아님 자동으로 결정할 수 있는 건가요?
+		 -->
+	<insert id="qnaInsert" parameterType="map">
+		INSERT INTO qna (qna_bno, mem_no, qna_title, qna_content, qna_type, qna_secret, qna_hit, qna_date)
+		VALUES (QNA_SEQ.nextval, #{mem_no}, #{qna_title}, #{qna_content}, '양도', #{qna_secret}, #{qna_hit},to_char(sysdate,'YYYY-MM-DD')) 
+	</insert>
+</mapper>

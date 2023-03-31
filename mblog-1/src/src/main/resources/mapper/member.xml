@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo">
+	<!-- map으로 받거나 vo로 받거나... map으로 받을 때는 requestParam...을 사용... 그럴 땐 vo 못씀. responseBody(POST)는 vo사용가능. -->
+	<insert id="memberInsert" parameterType="map">
+		INSERT INTO member230324 (mem_no, mem_uid, mem_pw, mem_name, mem_nickname, mem_email, mem_tel, mem_gender, mem_birthday, mem_zipcode, mem_addr, mem_addr_dtl, mem_auth, mem_status)
+					VALUES (seq_member_no.nextval
+				<if test="mem_uid != null">
+					, #{mem_uid}
+				</if>
+				<if test="mem_pw != null">
+					, #{mem_pw}
+				</if>
+				<if test="mem_name != null">
+					, #{mem_name}
+				</if>
+				<if test="mem_nickname != null">
+					, #{mem_nickname}
+				</if>
+				<if test="mem_email != null">
+					, #{mem_email}
+				</if>
+				<if test="mem_tel != null">
+					, #{mem_tel}
+				</if>
+				<if test="mem_gender != null">
+					, #{mem_gender}
+				</if>
+				<if test="mem_birthday != null">
+					, #{mem_birthday}
+				</if>
+				<if test="mem_zipcode != null">
+					, #{mem_zipcode}
+				</if>
+				<if test="mem_addr != null">
+					, #{mem_addr}
+				</if>
+				<if test="mem_addr_dtl != null">
+					, #{mem_addr_dtl}
+				</if>
+				<if test="mem_auth != null">
+					, #{mem_auth}
+				</if>
+				<if test="mem_status != null">
+					, #{mem_status}
+				</if>
+					)
+	</insert>
+	<select id="getToday" parameterType="string" resultType="string">
+		SELECT to_char(sysdate, 'YYYY-MM-DD') FROM dual
+	</select>
+	<select id="login" parameterType="map" resultType="string">
+		SELECT mem_name from member230324
+		<where>
+			<if test="mem_uid != null and mem_uid.length() > 0">
+				AND mem_uid = #{mem_uid}
+			</if>
+			<if test="mem_pw != null and mem_pw.length() > 0">
+				AND mem_pw = #{mem_pw}
+			</if>
+		</where>
+	</select>
+	<select id="memberList" parameterType="map" resultType="map">
+		select mem_uid, mem_name from member230324
+		<where>
+			<if test='mem_uid !=null and mem_uid.length()>0'>
+				AND mem_uid = #{mem_uid}
+			</if>
+			<!-- 
+				<input type=text id="mem_nickname" value="" />
+				항상 무조건 빈 문자열이다. 폼전송하면 무조건 빈 문자열이 있는 상태이다.
+				너가 아무것도 입력하지 않아도 null에 걸리지 않는다.
+				얘를 잡아내기 위해서는 문자열이 > 0 인 상태까지 비교해야 잡아낼 수 있다.
+			 -->
+			<if test='MEM_NICKNAME !=null and MEM_NICKNAME.length()>0'>
+				AND MEM_NICKNAME = #{MEM_NICKNAME}
+			</if>
+		</where>
+	</select>
+</mapper>

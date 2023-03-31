@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'react-bootstrap/Image'
 import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage2 = () => {
   const REDIRECT_URI = "http://localhost:3000/auth/kakao/callback";
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
   return (
@@ -16,4 +16,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default LoginPage2

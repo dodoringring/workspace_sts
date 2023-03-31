@@ -23,6 +23,7 @@ public class RestBoardController {
 	@Autowired
 	private BoardLogic boardLogic = null;
 	
+	
 	@GetMapping("jsonBoardList")
 	public String boardList(Model model, @RequestParam Map<String,Object> pMap) {
 		logger.info("jsonBoardList");

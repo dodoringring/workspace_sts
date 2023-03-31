@@ -5,10 +5,10 @@ import KakaoMap from '../kakao/KakaoMap';
 import {ContainerDiv, FormDiv, HeaderDiv} from '../styles/FormStyle';
 
 const HomePage = () => {
-  const member=window.localStorage.getItem('member')
-  console.log(JSON.stringify(member));
-  const jsonDoc=JSON.parse(member)
-  console.log(jsonDoc.mem_id+','+jsonDoc.mem_pw);
+  const member = window.localStorage.getItem('member')
+  console.log(JSON.parse(member))
+  const jsonDoc = JSON.parse(member)
+  // console.log(jsonDoc.mem_id + ", " + jsonDoc.mem_pw)
   const navigate = useNavigate();
   const handleLogin = () => {
     console.log('login 요청');
