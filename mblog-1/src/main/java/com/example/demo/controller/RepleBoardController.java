@@ -42,6 +42,18 @@ public class RepleBoardController {
 		result = rbLogic.qnaInsert(pmap);
 		return String.valueOf(result);
 	}
+	//http://localhost:8000/reple/qnaList?content=제목
+	//http://localhost:8000/reple/qnaList?content=제목&condition=작성자(null체크를 하도록 했다.)
+	@GetMapping("qnaList")
+	public String qnaList(@RequestParam Map<String, Object> pmap) {
+		log.info("qnaList called");
+		log.info(pmap);
+		List<Map<String, Object>> blist = null;
+		blist = rbLogic.qnaList(pmap);
+		Gson g = new Gson();
+		String temp = g.toJson(blist);
+		return temp;
+	}
 	
 	@GetMapping("imageGet")//파일 이름 받아와야하니까 get...
 	public Object imageGet(HttpServletRequest req, HttpServletResponse res) {
@@ -171,13 +183,4 @@ public class RepleBoardController {
 		return temp;
 	}
 	
-	@GetMapping("qnaList")
-	public String qnaList(@RequestParam Map<String, Object> pmap) {
-		log.info("qnaList called");
-		List<Map<String, Object>> blist = null;
-		blist = rbLogic.qnaList(pmap);
-		Gson g = new Gson();
-		String temp = g.toJson(blist);
-		return temp;
-	}
 }

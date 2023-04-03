@@ -3,11 +3,34 @@
 <mapper namespace="com.example.demo">
 	<select id="qnaList" parameterType="java.util.HashMap" resultType="map">
 		SELECT
-		q.qna_bno, q.qna_title, q.qna_content, q.QNA_TYPE,
-		q.qna_hit, q.qna_date, m.mem_name
+		q.qna_bno, q.qna_title, q.qna_content, q.qna_type,
+		q.qna_hit, q.qna_date, m.mem_name, m.mem_no, q.qna_secret
 		FROM qna q, MEMBER230324 m
 		where q.mem_no = m.mem_no
+		<if test="qna_type!=null and !qna_type.equals('전체')"><!-- KhMyFilter조건검색시 사용 -->
+			AND qna_type=#{qna_type}
+		</if>
+		<if test="mem_no!=null"><!-- 회원 고유번호별 조건검색시 사용 -->
+			AND m.mem_no = #{mem_no} 
+		</if>
+		<if test="qna_bno!=null"><!-- 글번호 조건검색시 사용 -->
+			AND q.qna_bno = #{qna_bno} 
+		</if>
+		<if test="content!=null">
+			<choose>
+				<when test="condition!=null and condition.equals('제목')">
+					AND qna_title LIKE '%'||#{content}||'%'
+				</when>
+				<when test="condition!=null and condition.equals('내용')">
+					AND qna_content LIKE '%'||#{content}||'%'
+				</when>
+				<when test="condition!=null and condition.equals('작성자')">
+					AND mem_name LIKE '%'||#{content}||'%'
+				</when>
+			</choose>
+		</if>
 	</select>
+	
 	<!-- 
 	
 	@RequestParam-Map타입이 올 수 있다-get방식 요청 - 요청header담김-인터셉트-캐시에 있는 정보가 다시 출력될 수 있다.
