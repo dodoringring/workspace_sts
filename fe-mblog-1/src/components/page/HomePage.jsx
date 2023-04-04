@@ -20,7 +20,7 @@ const HomePage = () => {
       <ContainerDiv>
         <BlogHeader/>
           <HeaderDiv>
-            <h2 style={{marginLeft:"10px"}}>보쌈 맛있겠다~!</h2>
+            <h2 style={{marginLeft:"10px"}}>존버는 승리한다...!!!</h2>
             <button onClick={handleLogin}>로그인</button>
           </HeaderDiv>
           <FormDiv style={{textAlign:"center"}}>

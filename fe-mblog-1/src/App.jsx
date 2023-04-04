@@ -96,7 +96,7 @@ function App({authLogic, imageUploader}) {
           <Route path='/reple/boardwrite' exact={true} element={<RepleBoardWriteForm />} />
           <Route path='qna/list' exact={true} element={<KhQnAListPage />} />
           <Route path='qna/detail/*' element={<KhQnADetailPage />} />
-          <Route path='/qna/write' exact={true} element={<KhQnAWritePage />} />
+          <Route path='/qna/write/*' exact={true} element={<KhQnAWritePage />} />
           <Route path='/qna/update/:bno' exact={true} element={<KhQnAWritePage />} />
           <Route path='/dept/:gubun' element={<DeptPage imageUploader={imageUploader} />} />
           {/* 컴포넌트 함수를 호출하는 것이다 - 마운트(화면이 보여지는 것) - return이 호출되었다 */}

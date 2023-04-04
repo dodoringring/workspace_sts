@@ -14,20 +14,22 @@ import KhSearchBar from './KhSearchBar.jxs';
 const KhQnAListPage = ({authLogic}) => {
   //페이징 처리 시에 현재 내가 바라보는 페이지 정보 담기
   let page = 1  
-  const navigate = useNavigate();
+  const navigate = useNavigate();//화면전환시 필요한 훅
   const search = decodeURIComponent(useLocation().search);
   //오라클 서버에서 받아온 정보를 담기
-  const [listBody,setListBody] = useState([]);
-  //qna구분 상수값-라벨
+  //{}-객체 리터럴이다. - 클래스
+  const [listBody,setListBody] = useState([]);//배열타입[{},{},{}]->List<Map>, List<VO>
+  //qna_type구분 상수값-라벨
   const[types]= useState(['전체','일반','결제','양도','회원','수업']);
-  //qna 상태 관리위해 선언
+  //qna_type 상태 관리위해 선언
   const [tTitle, setTTitle] = useState('전체') 
   //함수를 메모이제이션 해주는-useCallback->useMemo는 값을 메모이제이션
   const handleTTitle = useCallback((element) => {
     //파라미터로 받은 값을 저장 - tTitle
     setTTitle(element);
   },[]);//의존배열이 비었으므로 한번 메모이제이션 된 함수값을 계속 기억해둠
-
+  //일반 함수로 정의 하는것과 useEffect에서 정의하는 것 사이의 차이점에 대해 나는 설명할 수 있다.
+  // async가 있고 없고는 별개의 문제이다.awair에 대해서는 논외이다.
   useEffect(() => {
     const qnaList = async() =>{
       //콤보박스 내용 -> 제목, 내용, 작성자 중 하나
@@ -61,21 +63,33 @@ const KhQnAListPage = ({authLogic}) => {
           qna_type:item.QNA_TYPE,
           qna_title:item.QNA_TITLE,
           mem_name:item.MEM_NAME,
-          mem_no:item.MEM_NO,
           qna_hit:item.QNA_HIT,
           qna_date:item.QNA_DATE,
-          qna_secret:item.QNA_SECRET,
+          qna_secret:JSON.parse(item.QNA_SECRET),
+          file:item.FILE_NAME,
+          comment:item.COMM_NO
         }
         list.push(obj)
       })
-      setListBody(list);
+      //데이터 셋에 따라 리랜더링할 것과 기존의 DOM을 출력하는 것을 구분 할 수 있기 때문-비교알고리즘
+      setListBody(list);//listBody[1]-일반 변수로 선언 하는것과 훅을 선언하는것과의 차이점에 대해 설명 할 수 있다.
     }
+    /* return()=>{
+      alert('리턴 호출')
+      console.log('화면 렌더링 - 인터셉트 당하는 느낌');
+    } */
     qnaList();
   },[setListBody, setTTitle,  page, search]);
 
   //listItemsElements 클릭이벤트 처리시 사용
   const getAuth = (listItem) => {
     console.log(listItem);
+    console.log(listItem.qna_secret);
+    if(listItem.qna_secret === false){
+      navigate(`/qna/detail?qna_bno=${listItem.qna_bno}`)
+    }else{
+      console.log("권한이 없습니다.|비공개입니다.");
+    }
 
   }
 
@@ -91,7 +105,7 @@ const KhQnAListPage = ({authLogic}) => {
     :
     <th key={index} style={{width:HeaderWd[index],textAlign: 'center'}}>{listHeader}</th>
   )
-
+//ListBody는 상태 훅이다.
   const listItemsElements = listBody.map((listItem, index) => {
     console.log(listItem);
     return (
@@ -102,13 +116,13 @@ const KhQnAListPage = ({authLogic}) => {
           key==='date'?
           <td key={index} style={{fontSize:'15px', textAlign: 'center'}}>{listItem[key]}</td>
           :
-          key==='title'?
+          key==='qna_title'?
           <td key={index}>            
             {isNaN(listItem.file)&&<span><i style={{width:"15px", height:"15px"}} className={"fas fa-file-lines"}></i></span>}
             {!isNaN(listItem.file)&&<span><i style={{width:"15px", height:"15px"}} className={"fas fa-image"}></i></span>}
             &nbsp;&nbsp;{listItem[key]}
             {listItem.comment?<span style={{fontWeight:"bold"}}>&nbsp;&nbsp;[답변완료]</span>:<span>&nbsp;&nbsp;[미답변]</span>}
-            {listItem.secret&&<span>&nbsp;&nbsp;<i className="fas fa-lock"></i></span>}</td>
+            {listItem.qna_secret&&<span>&nbsp;&nbsp;<i className="fas fa-lock"></i></span>}</td>
           :
           <td key={index} style={{textAlign: 'center'}}>{listItem[key]}</td>
         ))}  

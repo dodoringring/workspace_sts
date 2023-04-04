@@ -6445,3 +6445,67 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.mybatis.s
 2023-04-03 15:35:18,212 [Worker-106: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2023-04-03 15:35:18,212 [Worker-106: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2023-04-03 15:35:18,212 [Worker-106: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 09:16:17,709 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-04-04 09:33:39,579 [Worker-22: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 09:33:39,581 [Worker-22: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 09:33:39,583 [Worker-22: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 09:33:39,603 [Worker-22: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2023-04-04 09:33:39,609 [Worker-22: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 09:33:39,609 [Worker-22: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 09:33:39,609 [Worker-22: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 10:37:02,324 [Worker-40: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 10:37:02,325 [Worker-40: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 10:37:02,327 [Worker-40: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 10:37:02,340 [Worker-40: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2023-04-04 10:37:02,346 [Worker-40: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 10:37:02,347 [Worker-40: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 10:37:02,347 [Worker-40: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 11:41:23,656 [Worker-56: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 11:41:23,656 [Worker-56: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 11:41:23,657 [Worker-56: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 11:41:23,663 [Worker-56: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2023-04-04 11:41:23,666 [Worker-56: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 11:41:23,666 [Worker-56: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 11:41:23,666 [Worker-56: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 11:44:19,269 [Worker-54: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 11:44:19,269 [Worker-54: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 11:44:19,269 [Worker-54: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2023-04-04 11:44:19,269 [Worker-54: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 11:44:19,273 [Worker-54: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 11:44:19,273 [Worker-54: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 11:44:19,273 [Worker-54: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 11:48:02,964 [Worker-55: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 11:48:02,964 [Worker-55: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 11:48:02,965 [Worker-55: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 11:48:02,971 [Worker-55: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2023-04-04 11:48:02,975 [Worker-55: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 11:48:02,975 [Worker-55: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 11:48:02,975 [Worker-55: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 11:52:38,799 [Worker-57: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 11:52:38,799 [Worker-57: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 11:52:38,800 [Worker-57: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 11:52:38,805 [Worker-57: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2023-04-04 11:52:38,808 [Worker-57: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 11:52:38,808 [Worker-57: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 11:52:38,808 [Worker-57: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 14:09:30,527 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 14:09:30,527 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 14:09:30,527 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 14:09:30,534 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2023-04-04 14:09:30,537 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 14:09:30,537 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 14:09:30,538 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 14:17:22,330 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 14:17:22,330 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 14:17:22,331 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 14:17:22,336 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2023-04-04 14:17:22,339 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 14:17:22,339 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 14:17:22,339 [Worker-100: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources
+2023-04-04 14:26:12,376 [Worker-93: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 14:26:12,376 [Worker-93: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 14:26:12,376 [Worker-93: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2023-04-04 14:26:12,376 [Worker-93: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-04 14:26:12,380 [Worker-93: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-04 14:26:12,380 [Worker-93: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2023-04-04 14:26:12,380 [Worker-93: Launching mblog-1 - Mblog1Application] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\workspace_sts\mblog-1\src\test\resources

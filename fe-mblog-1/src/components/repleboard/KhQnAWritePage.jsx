@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { qnaInsertDB } from '../../service/dbLogic';
 import BlogFooter from '../include/BlogFooter';
 import BlogHeader from '../include/BlogHeader';
@@ -13,6 +14,7 @@ import QuillEditor from './QuillEditor';
 import RepleBoardFileInsert from './RepleBoardFileInsert';
 
 const KhQnAWritePage = ({authLogic}) => {
+  const navigate=useNavigate();
 
   const[title, setTitle]= useState('');
   const[content, setContent]= useState('');//내용작성
@@ -29,9 +31,9 @@ const KhQnAWritePage = ({authLogic}) => {
   },[]);
 
 
-  const handleFiles = useCallback((value) => {
-    setFiles([...files, value]);
-  },[files]);
+  const handleFiles = useCallback((value) => {//파일이 새로 들어올때마다 useCallback이 처리된다.
+    setFiles([...files, value]);//깊은복사. ...스프레드연산자-새로 만들어진 카피
+  },[files]);//[m.png, m1.png, m2.png]
 
 
   const handleTitle = useCallback((e) => {
@@ -51,12 +53,14 @@ const KhQnAWritePage = ({authLogic}) => {
       qna_content:content,
       qna_secret:(secret?'true':'false'),
       qna_type:tTitle,
-      mem_no:sessionStorage.getItem('no')
+      mem_no:sessionStorage.getItem('no'),
+      fileNames:files
     }//사용자가 입력한 값 넘기기-@RequestBody로 처리됨
     const res=await qnaInsertDB(board)
     console.log(res.data)
     //성공시 페이지 이동 처리하기
     // window.location.replace('/qna/list?page=1')
+    navigate("/qna/list");
   }
     
   return (

@@ -57,8 +57,33 @@
 			작성자는 입력 받도록 화면을 그려야할까요?
 			아님 자동으로 결정할 수 있는 건가요?
 		 -->
-	<insert id="qnaInsert" parameterType="map">
-		INSERT INTO qna (qna_bno, mem_no, qna_title, qna_content, qna_type, qna_secret, qna_hit, qna_date)
-		VALUES (QNA_SEQ.nextval, #{mem_no}, #{qna_title}, #{qna_content}, '양도', #{qna_secret}, #{qna_hit},to_char(sysdate,'YYYY-MM-DD')) 
+	<insert id="qnaInsert" parameterType="map" useGeneratedKeys="true" keyColumn="qna_bno" keyProperty="qna_bno">
+		INSERT INTO qna (qna_bno, mem_no, qna_title
+									, qna_content, qna_type, qna_secret
+									, qna_hit, qna_date)
+		VALUES (qna_seq.nextval, #{mem_no}, #{qna_title}
+						, #{qna_content}, #{qna_type}, #{qna_secret}
+						, 0,to_char(sysdate,'YYYY-MM-DD')) 
 	</insert>
+	<!--=====================================================================  -->
+
+	<select id="fileList" parameterType="map" resultType="map">
+	<!-- 셀렉트는 대문자로 처리한다. 대문자로 담아준다. 화면에서 넘겨받은 것들은 소문자로 한다. 정한 규칙이다. -->
+		SELECT fime_name, file_size
+			FROM mblog_file
+		WHERE qna_bno=#{qna_bno}
+	</select>
+	<insert id="fileInsert" parameterType="map">
+		INSERT INTO mblog_file(file_no, file_path, file_name, file_size)
+								VALUES(mblog_file_seq.nextval, #{file_path}
+								, #{file_name}, #{file_size})
+	</insert>
+	<update id="fileUpdate" parameterType="list">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+			UPDATE MBLOG_FILE
+				SET board_type='qna' ,
+						qna_bno=#{item.qna_bno}
+			WHERE file_name=LTRIM(#{item.file_name})
+		</foreach>
+	</update>
 </mapper>

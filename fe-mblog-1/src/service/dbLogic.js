@@ -18,6 +18,7 @@ export const qnaListDB = (board) => {
 };
 
 export const qnaInsertDB = (board) => {
+  console.log(board)//fileNames가 있어야 한다. 배열. =['man1.png','man2.png','man3.png']
   return new Promise((resolve, reject) => {
     try {
       const response = axios({
