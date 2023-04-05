@@ -38,7 +38,14 @@ public class RepleBoardDao {
 		log.info("useGeneratedKeys 프로퍼티 속성값 가져오기" +qna_bno);
 		return qna_bno;
 	}
-
+	
+	public int qnaDelete(Map<String, Object> pMap) {
+		log.info("qnaDelete 호출됨");
+		int result = 0;
+		result = sst.delete("qnaDelete", pMap);
+		return result;
+	}
+	
 	public int fileInsert(Map<String, Object> pMap) {
 		log.info("fileinsert 호출");
 		int result = 0;//입력이 성공했는지 유무를 담는 변수 선언
@@ -53,6 +60,35 @@ public class RepleBoardDao {
 		result =sst.update("fileUpdate", pList);
 		log.info(result);
 		
+	}
+
+	public List<Map<String, Object>> fileList(Map<String, Object> pmap) {
+		log.info(" fileList called");
+		List<Map<String, Object>> fList = null;
+		fList = sst.selectList("fileList", pmap);
+		return fList;
+	}
+
+	public List<Map<String, Object>> qnaDetail(Map<String, Object> pmap) {
+		log.info(" qnaDetail called");
+		List<Map<String, Object>> qList = null;
+		qList = sst.selectList("qnaDetail", pmap);
+		return qList;
+	}
+	
+	public void qnaHit(Map<String, Object> pmap) {
+		log.info(" qnaHit called");
+		log.info(pmap);//qna_bno가 꼭 들어 있어야한다.
+		int result=0;
+		result=sst.update("qnaHit",pmap);
+		log.info(result);
+	}
+
+	public int qnaUpdate(Map<String, Object> pMap) {
+		log.info("qnaUpdate 호출됨");
+		int result = 0;
+		result = sst.update("qnaUpdate", pMap);
+		return result;
 	}
 	
 	

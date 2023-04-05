@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const qnaListDB = (board) => {
   return new Promise((resolve, reject) => {
     try {
@@ -8,6 +9,24 @@ export const qnaListDB = (board) => {
       const response = axios({//3000번 서버에서 8000번 서버로 요청을 함 - 네트워크(다른서버-CORS이슈)
         method: "get",
         url: process.env.REACT_APP_SPRING_IP + "reple/qnaList",
+        params: board, // 쿼리스트링은 header에 담김 - get방식 params
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const qnaDetailDB = (board) => {
+  return new Promise((resolve, reject) => {
+    console.log(board)//QNA_BNO인지 qna_bno인지 대소문자 여기서 체크하기  const obj={QNA_BNO:18} 키값이 소문자인지 대문자인지..
+    try {
+      console.log(board)
+      //axios-비동기 요청 처리 ajax-fetch(브라우저)-axios(NodeJS-오라클 서버 연동 가능해짐)
+      const response = axios({//3000번 서버에서 8000번 서버로 요청을 함 - 네트워크(다른서버-CORS이슈)
+        method: "get",
+        url: process.env.REACT_APP_SPRING_IP + "reple/qnaDetail",
         params: board, // 쿼리스트링은 header에 담김 - get방식 params
       });
       resolve(response);
@@ -34,6 +53,8 @@ export const qnaInsertDB = (board) => {
 };
 
 export const qnaUpdateDB = (board) => {
+  console.log("qnaUpdateDB")//사용자가 입력한 값 확인하기
+
   //대소문자 구분 어떨게 할것인가?
   //리턴값은 대문자로
   //아니면 둘다 대문자로 할까? 안됨... 마이바티스가 자동으로 바꿔준다?

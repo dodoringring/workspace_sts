@@ -4,6 +4,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,6 +58,52 @@ public class RepleBoardController {
 		result = rbLogic.qnaInsert(pmap);
 		return String.valueOf(result);
 	}
+	
+	@GetMapping("qnaDelete")
+	public int qnaDelete(@RequestParam Map<String, Object> pMap) {
+		log.info("qnaDelete 호출");
+		log.info(pMap);
+		int result = 0;
+		result = rbLogic.qnaDelete(pMap);
+		return result;
+	}
+	@PostMapping("qnaUpdate")
+	public int qnaUpdate(@RequestBody Map<String, Object> pMap) {
+		log.info("qnaUpdate 호출");
+		log.info(pMap);
+		int result = 0;
+		result = rbLogic.qnaUpdate(pMap);
+		return result;
+	}
+	
+	//이미지 다운로드 처리
+	@GetMapping("imageDownload")
+	public ResponseEntity<Resource> imageDownload(@RequestParam(value="imageName") String imageName){
+		log.info("imageDownload");
+		String fileFolder="D:\\workspace_sts\\mblog-1\\src\\main\\webapp\\pds";
+		
+		try {
+			File file = new File(fileFolder, URLDecoder.decode(imageName, "UTF-8"));
+			HttpHeaders header = new HttpHeaders();
+			header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment : filename" + imageName);
+			header.add("Cache-Control",  "no-cache, no-store, must-revalidate");
+			header.add("Pragma" , "no-cache");
+			header.add("Expires" , "0");
+			
+			Path path=Paths.get(file.getAbsolutePath());
+			//이미지 리소스를 읽어서 담기
+			ByteArrayResource resource=new ByteArrayResource(Files.readAllBytes(path));
+			return ResponseEntity.ok()//200
+						.headers(header)//헤더 설정하기
+						.contentLength(file.length())//파일크기
+						.contentType(MediaType.parseMediaType("application/octet-stream"))//이미지를 브라우저가 로딩 하지 못하게 함
+						.body(resource);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+}//end of imageDownload
+	
 	//http://localhost:8000/reple/qnaList?content=제목
 	//http://localhost:8000/reple/qnaList?content=제목&condition=작성자(null체크를 하도록 했다.)
 	@GetMapping("qnaList")
@@ -57,6 +112,19 @@ public class RepleBoardController {
 		log.info(pmap);
 		List<Map<String, Object>> blist = null;
 		blist = rbLogic.qnaList(pmap);
+		Gson g = new Gson();
+		String temp = g.toJson(blist);
+		return temp;
+	}
+	@GetMapping("qnaDetail")
+	public String qnaDetail(@RequestParam Map<String, Object> pmap) {
+		log.info("qnaDetail called");
+		log.info(pmap);
+		List<Map<String, Object>> blist = null;
+		
+		pmap.put("id", "qna");
+		
+		blist = rbLogic.qnaDetail(pmap);
 		Gson g = new Gson();
 		String temp = g.toJson(blist);
 		return temp;

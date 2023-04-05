@@ -54,6 +54,21 @@ public class RepleBoardLogic {
 		}
 		return result;
 	}
+	
+	//이미지 파일 삭제하기는 별도로 구현 필요
+		//여기서는 qna테이블 레코드만 삭제구현
+		public int qnaDelete(Map<String, Object>pMap) {
+			int result = 0;
+			result = rbDao.qnaDelete(pMap);
+			return result;
+		}
+		
+		public int qnaUpdate(Map<String, Object>pMap) {
+			int result = 0;
+			result = rbDao.qnaUpdate(pMap);
+			return result;
+		}
+	
 	private List<Map<String, Object>> fileNames(Map<String, Object> pmap) {
 		List<Map<String, Object>> pList=new ArrayList<>();
 //		pmap.get("fileNames")=>[맨1, 맨2.png, 맨3]
@@ -119,6 +134,35 @@ public class RepleBoardLogic {
 		//리턴 값으로 선택한 이미지 파일명을 넘겨서 사용자 화면에 첨부된 파일명을 열거해주는데 사용할 것임
 		String temp = filename;
 		return temp;
+	}
+	//한건만 가져오는데 왜 List<Map>인가요? 그냥 Map으로도 가능 하지 않나?
+	//DataSet에 변화를 가져다 주는 구문 [{qna},{fileList},{commentList}]
+	public List<Map<String, Object>> qnaDetail(Map<String, Object> pmap) {//하나만 가져오는 경우
+		log.info("qnaDetail 호출");
+		log.info(pmap);
+		int qna_bno=0;
+		if(pmap.get("QNA_BNO")!=null) {//부적합한 열유형 오류 방지
+			qna_bno=Integer.parseInt(pmap.get("QNA_BNO").toString());
+			pmap.put("qna_bno", qna_bno);
+		}
+		List<Map<String, Object>> blist = null;
+		blist = rbDao.qnaDetail(pmap);
+		if(blist.size()>0) {//조회결과가 있다.
+			
+			rbDao.qnaHit(pmap);
+		}
+		log.info(blist);
+		//댓글 처리 추가
+		//insert here
+		//댓글 처리 추가
+		//이미지 파일이 있어?
+		if(blist!=null && blist.size()==1) {
+			List<Map<String, Object>> fileList = rbDao.fileList(pmap);
+			if(fileList!=null && fileList.size()>0) {
+				blist.addAll(fileList);//addAll한꺼번에 넣어주기
+			}
+		}
+		return blist;
 	}
 	
 

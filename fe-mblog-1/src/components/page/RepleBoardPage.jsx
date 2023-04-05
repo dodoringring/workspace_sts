@@ -5,7 +5,7 @@ import BlogFooter from '../include/BlogFooter'
 import BlogHeader from '../include/BlogHeader'
 import RepleBoardList from '../repleboard/RepleBoardList'
 
-const RepleBoardPage = () => {
+const RepleBoardPage = ({authLogic}) => {
   const navigate = useNavigate()
 
   const boardSearch = () => {
@@ -14,7 +14,7 @@ const RepleBoardPage = () => {
   
   return (
     <>
-      <BlogHeader />
+      <BlogHeader authLogic={authLogic} />
       <div className='container'>
         <div className="page-header">
           <h2>댓글형 게시판&nbsp;<i className="fa-solid fa-angles-right"></i>&nbsp;<small>글목록</small></h2>

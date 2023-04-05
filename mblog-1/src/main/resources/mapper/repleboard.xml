@@ -29,6 +29,27 @@
 				</when>
 			</choose>
 		</if>
+		ORDER BY qna_bno desc
+	</select>
+	
+	<select id="qnaDetail" parameterType="java.util.HashMap" resultType="map">
+		SELECT 
+		q.qna_bno, q.qna_title, q.qna_content, 
+		q.QNA_TYPE,q.qna_hit, q.qna_date, qna_secret
+		,m.mem_name, m.mem_no, c.comm_no
+		FROM qna q, MEMBER230324 m
+		, (SELECT count(comm_no) comm_no,qna_bno 
+            from qna_comment
+           GROUP BY qna_bno 
+            ) c
+	where q.mem_no = m.mem_no
+        and q.qna_bno=c.qna_bno(+)
+        <if test='mem_no!=null'><!--회원고유번호 조건검색시 사용-->
+        	AND m.mem_no=#{mem_no}
+        </if>
+        <if test='qna_bno!=null'><!-- setNull(1,1111)에러 타입, 부적합한 열유형 Integer.parseInt()-->
+		 AND q.qna_bno = #{qna_bno}
+		</if>
 	</select>
 	
 	<!-- 
@@ -65,11 +86,59 @@
 						, #{qna_content}, #{qna_type}, #{qna_secret}
 						, 0,to_char(sysdate,'YYYY-MM-DD')) 
 	</insert>
+	<!-- 화면에서 숫자 타입 받아올때 형전환 처리 할것
+	안하면 부적합한 열유형 관련 에러 메세비 발생하니 주의할것 -->
+	<delete id='qnaDelete' parameterType="map">
+		DELETE FROM qna WHERE qna_bno=#{qna_bno}
+	</delete>
+	<!-- 
+	이 쿼리문은 언제 어디서 왜 호출 되어야 할까요?
+	controller logic dao가 다 필요한 경우가 있고 - 글쓰기
+	controller랑 logic까지만 필요한 경우가 있고-이미지 업로드
+	dao만 필요한 경우가 있다.- 조회수 증가시키기
+	위치 
+	언제 조회수 증가 함수호출을 해야할까?
+	그래서 qnaList와 qnaDetail을 나누길 잘 했다...
+	 -->
+	<update id="qnaHit" parameterType="map">
+	<choose>
+		<when test='id.equals("notice")'>
+			UPDATE notice SET not_hit = not_hit+1
+				WHERE not_bno=#{not_bno}
+		</when>
+		<when test='id.equals("qna")'>
+			UPDATE qna SET qna_hit = qna_hit+1
+				WHERE qna_bno=#{qna_bno}
+		</when>
+		<when test='id.equals("review")'>
+			UPDATE review SET rev_hit = rev_hit+1
+				WHERE rev_bno=#{rev_bno}
+		</when>
+	</choose>
+	</update>
+	<update id="qnaUpdate" parameterType="map">
+		UPDATE QNA
+			SET 
+		<if test="qna_title!=null">			
+			QNA_TITLE=#{qna_title},
+		</if>
+		<if test="qna_content!=null">			
+			QNA_CONTENT=#{qna_content},
+		</if>
+		<if test="qna_type!=null">			
+			QNA_TYPE=#{qna_type},
+		</if>
+		<if test="qna_secret!=null">			
+			QNA_SECRET=#{qna_secret},
+		</if>
+			QNA_UPDATE=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+		WHERE QNA_BNO = #{qna_bno}
+	</update>
 	<!--=====================================================================  -->
 
 	<select id="fileList" parameterType="map" resultType="map">
 	<!-- 셀렉트는 대문자로 처리한다. 대문자로 담아준다. 화면에서 넘겨받은 것들은 소문자로 한다. 정한 규칙이다. -->
-		SELECT fime_name, file_size
+		SELECT file_name, file_size
 			FROM mblog_file
 		WHERE qna_bno=#{qna_bno}
 	</select>
@@ -81,7 +150,7 @@
 	<update id="fileUpdate" parameterType="list">
 		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
 			UPDATE MBLOG_FILE
-				SET board_type='qna' ,
+				SET board_type='qna',
 						qna_bno=#{item.qna_bno}
 			WHERE file_name=LTRIM(#{item.file_name})
 		</foreach>

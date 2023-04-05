@@ -26,7 +26,7 @@ const Img = styled.img`
   object-fit: cover;
 `;
 
-const DeptPage = ({imageUploader}) => {
+const DeptPage = ({imageUploader,authLogic}) => {
   //화면 전환시나 가급적 전체 페이지 리로딩을 하지않음 -> Navigate훅을 사용하면 됨
   const navigate = useNavigate()
   //path = "dept/:gubun" -> 이 부분을 useParams가 가져옴
@@ -170,7 +170,7 @@ const DeptPage = ({imageUploader}) => {
 
   return (
     <>
-      <BlogHeader/>
+      <BlogHeader authLogic={authLogic}/>
       <div className='container'>
       <div className="page-header">
         <h2>부서관리&nbsp;<i className="fa-solid fa-angles-right"></i>&nbsp;<small>부서목록</small></h2>

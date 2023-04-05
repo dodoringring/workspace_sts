@@ -9,10 +9,17 @@ const RepleBoardHeader = ({detail, bno}) => {
   const navigate = useNavigate();
   
   const boardDelete = async() => {
-    
+    const board={
+      qna_bno:bno,//mybatis xml에 코드 #{qna_bno} 소문자로 같이 맞춰줘야한다. 
+    }
+    const res=await qnaDeleteDB(board)
+    //페이지 이동- 차이점 생각하기
+    // window.location.replace();
+    navigate("/qna/list?page=1")
   }
   const qnaList = () => {
-    navigate("/qna/list");
+    //파라미터로 받은 페이지번호가 돌아갈 페이지 정보이다.
+    navigate("/qna/list?page=1");
   }
   return (
     <div>
