@@ -155,4 +155,5 @@
 			WHERE file_name=LTRIM(#{item.file_name})
 		</foreach>
 	</update>
+	
 </mapper>

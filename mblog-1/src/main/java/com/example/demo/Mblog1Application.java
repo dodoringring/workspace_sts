@@ -21,7 +21,8 @@ public class Mblog1Application {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				//포트 번호는 여기에서 바꿔줄 것.
-				registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+				//결과적으로 3000번은 개발서버로 7000은 서비스 서버로 사용하면 될것이다.
+				registry.addMapping("/**").allowedOrigins("http://localhost:3000","http://localhost:7000");
 			}
 		};
 	}
